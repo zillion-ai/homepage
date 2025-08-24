@@ -3,13 +3,30 @@
   "version": "1.0.0",
   "private": true,
   "homepage": "https://zillion-ai.github.io/homepage",
+  "main": "electron.ts",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "build:web": "react-scripts build",
+    "build:electron": "cross-env PUBLIC_URL=. react-scripts build",
+    "electron:start": "concurrently \"npm run start\" \"wait-on http://localhost:3000 && cross-env ELECTRON_START_URL=true electron .\"",
+    "electron:serve": "npm run build:electron && npx electron ./dist-electron/electron.js",
+    "electron:dist": "npm run build:electron && electron-builder"
+  },
+  "build": {
+    "appId": "ai.zillion",
+    "files": [
+      "build/**/*",
+      "electron.ts",
+      "preload.ts"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
   },
   "dependencies": {
     "react": "^18.0.0",
@@ -22,6 +39,7 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "concurrently": "^9.2.0",
+    "cross-env": "^10.0.0",
     "electron": "^37.3.1",
     "electron-builder": "^26.0.12",
     "gh-pages": "^6.3.0",
