@@ -15,7 +15,8 @@
     "build:electron": "cross-env PUBLIC_URL=. react-scripts build",
     "electron:start": "concurrently \"npm run start\" \"wait-on http://localhost:3000 && cross-env ELECTRON_START_URL=true electron .\"",
     "electron:serve": "npm run build:electron && npx electron ./dist-electron/electron.js",
-    "electron:dist": "npm run build:electron && electron-builder"
+    "electron:dist": "npm run build:electron && electron-builder",
+    "build:cap": "cross-env PUBLIC_URL=. react-scripts build"
   },
   "build": {
     "appId": "ai.zillion",
