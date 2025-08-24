@@ -1,27 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import Nav from "./Nav";
 
-const Header: React.FC = () => (
-  <header style={{
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "2rem",
-    zIndex: 2,
-    position: "relative"
-  }}>
-    <div style={{
-      fontWeight: "bold",
-      fontSize: "2.5rem",
-      letterSpacing: "2px",
-      fontFamily: "'Zen Maru Gothic', 'Comic Sans MS', cursive, sans-serif",
-      color: "#00ffe7",
-      textShadow: "0 0 12px #00ffe7, 2px 2px 8px #181c2f"
-    }}>
-      zillion.ai
-    </div>
-    <Nav />
-  </header>
-);
+const Header: React.FC = () => {
+  const [menuOpen] = useState(false);
+
+  return (
+    <header className="flex justify-between items-center p-6 relative z-20">
+      {/* Logo */}
+      <div
+        className="font-bold text-3xl sm:text-4xl tracking-wider"
+        style={{
+          fontFamily: "'Zen Maru Gothic', 'Comic Sans MS', cursive, sans-serif",
+          color: "#00ffe7",
+          textShadow: "0 0 12px #00ffe7, 2px 2px 8px #181c2f",
+        }}
+      >
+        zillion.ai
+      </div>
+
+      {/* Desktop Nav */}
+      <div className="hidden md:block">
+        <Nav />
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      {menuOpen && (
+        <div className="absolute top-full left-0 w-full bg-[#181c2f] shadow-lg md:hidden">
+          <Nav isMobile />
+        </div>
+      )}
+    </header>
+  );
+};
 
 export default Header;

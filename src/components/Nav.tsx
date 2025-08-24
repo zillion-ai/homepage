@@ -1,33 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Nav: React.FC = () => (
-  <nav>
-    <a
-      href="#about"
-      style={{ color: "#ff00c8", margin: "0 1rem", fontWeight: 600, fontSize: "1.1rem" }}
-    >
-      About
-    </a>
-    <a
-      href="#features"
-      style={{ color: "#00ffe7", margin: "0 1rem", fontWeight: 600, fontSize: "1.1rem" }}
-    >
-      Features
-    </a>
-    <a
-      href="#community"
-      style={{ color: "#fff700", margin: "0 1rem", fontWeight: 600, fontSize: "1.1rem" }}
-    >
-      Community
-    </a>
-    <Link
-      to="/careers"
-      style={{ color: "#00ffe7", margin: "0 1rem", fontWeight: 600, fontSize: "1.1rem" }}
-    >
-      Careers
-    </Link>
-  </nav>
-);
+const Nav: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
+  const baseStyle = "font-semibold text-lg";
+  const spacing = isMobile ? "block py-3 text-center" : "inline-block mx-4";
+
+  return (
+    <nav>
+      <a href="#about" className={`${baseStyle} ${spacing} text-pink-500`}>
+        About
+      </a>
+      <a href="#features" className={`${baseStyle} ${spacing} text-cyan-400`}>
+        Features
+      </a>
+      <a href="#community" className={`${baseStyle} ${spacing} text-yellow-400`}>
+        Community
+      </a>
+      <Link to="/careers" className={`${baseStyle} ${spacing} text-cyan-400`}>
+        Careers
+      </Link>
+    </nav>
+  );
+};
 
 export default Nav;
